@@ -22,13 +22,14 @@
             );    
         }
         function component3(){
+            const myName = 'Abner';
             return React.createElement('div', {className:'component-3'},
-                React.createElement(component4)
+                React.createElement(component4, {name:myName, age:24})
             );    
         }
-        function component4(){
+        function component4(props){
             return React.createElement('div', {className:'component-4'},
-                React.createElement('p', {className:'paragraph'}, 'component4')
+                React.createElement('p', {className:'paragraph'}, props.name)
             );    
         }
         function MeuComponente(){
