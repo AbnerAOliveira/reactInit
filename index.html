@@ -11,10 +11,17 @@
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script>
+        const nameContext = React.createContext('name');
+
         function component1(){
-            return React.createElement('div', {className:'componen-1'},
-                React.createElement(component2)
-            );    
+            const myName = 'Abner 123';
+            return (
+                React.createElement(nameContext.Provider,{value:myName},
+                    React.createElement('div', {className:'component-1'},
+                        React.createElement(component2, null, {name:myName})
+                    )    
+                )  
+              );
         }
         function component2(){
             return React.createElement('div', {className:'component-2'},
@@ -22,15 +29,20 @@
             );    
         }
         function component3(){
-            const myName = 'Abner';
             return React.createElement('div', {className:'component-3'},
-                React.createElement(component4, {name:myName, age:24})
+                React.createElement(component4)
             );    
         }
-        function component4(props){
-            return React.createElement('div', {className:'component-4'},
-                React.createElement('p', {className:'paragraph'}, props.name)
-            );    
+        function component4(){
+            return (
+                React.createElement(nameContext.Consumer,null, 
+                    (name) => ( 
+                        React.createElement('div', {className:'component-4'},
+                            React.createElement('p', {className:'paragraph'}, name)
+                        )
+                    )   
+                )    
+            );
         }
         function MeuComponente(){
             return React.createElement('div', {id:'components'},
