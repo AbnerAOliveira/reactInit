@@ -3,17 +3,17 @@ const nameContext = React.createContext('name');
 function Component1(){
     const myName = 'Abner 123';
       return (
-          <nameContext.Provider value={myName}>
             <div className="component-1">
-                <Component2/>
+                <Component2>
+                    <Component4 name={myName}/>
+                </Component2>
             </div>
-          </nameContext.Provider>
       )
 }
-function Component2(){
+function Component2(props){
     return (
         <div className="component-2">
-            <Component3/>
+            {props.children}
         </div>
     ) 
 }
@@ -22,27 +22,21 @@ function Component3(){
         <div className="component-3">
             <Component4/>
         </div>
-    )  ;
+    )
 }
-function Component4(){
+function Component4(props){
     return(
-        <nameContext.Consumer>
-            {
-                (name) => ( 
-                    <div className="component-4">
-                        <p className="paragraph">{name}</p>
-                    </div>
-                )
-            }
-        </nameContext.Consumer>
-    );
+        <div className="component-4">
+            <p className="paragraph">{props.name}</p>
+        </div>
+    )
 }
 function MeuComponente(){
     return (
         <div app="components">
             <Component1/>
         </div>
-    );
+    )
 }
 
 ReactDOM.render(

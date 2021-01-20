@@ -2,17 +2,17 @@ const nameContext = React.createContext('name');
 
 function Component1() {
   const myName = 'Abner 123';
-  return /*#__PURE__*/React.createElement(nameContext.Provider, {
-    value: myName
-  }, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     className: "component-1"
-  }, /*#__PURE__*/React.createElement(Component2, null)));
+  }, /*#__PURE__*/React.createElement(Component2, null, /*#__PURE__*/React.createElement(Component4, {
+    name: myName
+  })));
 }
 
-function Component2() {
+function Component2(props) {
   return /*#__PURE__*/React.createElement("div", {
     className: "component-2"
-  }, /*#__PURE__*/React.createElement(Component3, null));
+  }, props.children);
 }
 
 function Component3() {
@@ -21,12 +21,12 @@ function Component3() {
   }, /*#__PURE__*/React.createElement(Component4, null));
 }
 
-function Component4() {
-  return /*#__PURE__*/React.createElement(nameContext.Consumer, null, name => /*#__PURE__*/React.createElement("div", {
+function Component4(props) {
+  return /*#__PURE__*/React.createElement("div", {
     className: "component-4"
   }, /*#__PURE__*/React.createElement("p", {
     className: "paragraph"
-  }, name)));
+  }, props.name));
 }
 
 function MeuComponente() {
